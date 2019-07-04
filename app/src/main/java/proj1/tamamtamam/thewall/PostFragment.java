@@ -44,13 +44,13 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);;
 
         postList = new ArrayList<>();
-        postList.add(new Post(1, "a used laptop", "downtown resort", "yesterday"));
-        postList.add(new Post(2, "a used charger", "downtown resort", "yesterday"));
+        postList.add(new Post(1, "a used laptop", "downtown resort", "$200"));
+        postList.add(new Post(2, "a used charger", "downtown resort", "$10"));
         mRecyclerView = getView().findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
-        adapter = new PostsRecyclerViewAdapter(postList, this);
+        adapter = new PostsRecyclerViewAdapter(postList, this, getActivity());
         mRecyclerView.setAdapter(adapter);
     }
 
