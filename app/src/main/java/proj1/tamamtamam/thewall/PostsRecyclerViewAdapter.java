@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -30,6 +28,7 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
         mValues = items;
         mListener = listener;
         this.context = context;
+
     }
 
     @Override
@@ -43,9 +42,8 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mTitleView.setText(mValues.get(position).getTitle());
-        holder.mImageView.setImageResource(android.R.drawable.arrow_down_float);
         holder.mPlaceView.setText(mValues.get(position).getPlace());
-        holder.mDateView.setText(mValues.get(position).getDate());
+        holder.mDateView.setText(mValues.get(position).getPrice());
 
         Picasso.with(this.context)
                 .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
@@ -53,17 +51,7 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
                 .resize(400, 400)
                 .centerCrop()
                 .rotate(0)
-                .into(holder.mImageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(context, "Fetched image from internet", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError() {
-                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .into(holder.mImageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +85,7 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
             mTitleView = (TextView) view.findViewById(R.id.title);
             mImageView = (ImageView) view.findViewById(R.id.image);
             mPlaceView = (TextView) view.findViewById(R.id.place);
-            mDateView = (TextView) view.findViewById(R.id.date);
+            mDateView = (TextView) view.findViewById(R.id.price);
         }
 
         @Override

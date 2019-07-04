@@ -5,13 +5,14 @@ class Post {
     private String image;
     private String title;
     private String place;
-    private String date;
+    private String price;
 
-    Post(int id, String title, String place, String date) {
+    Post(int id, String title, String place, String price) {
         this.id = id;
         this.title = title;
         this.place = place;
-        this.date = date;
+        this.price = price;
+
     }
 
     public String getPlace() {
@@ -26,8 +27,8 @@ class Post {
         return image;
     }
 
-    public String getDate() {
-        return date;
+    public String getPrice() {
+        return price;
     }
 
     public int getId() {

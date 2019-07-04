@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     android:paddingLeft="6dp"
     android:paddingRight="6dp">
 
@@ -17,52 +15,54 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_alignWithParentIfMissing="true"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:background="#f8f8f8" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="#ECE9E9" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:lines="2"
-            android:paddingLeft="10dp"
-            tools:text="فروش خودروهای جدید وارداتی" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/image"
+            android:paddingTop="0dp"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/date"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            tools:text="قیمت" />
+            android:layout_above="@id/price"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/image"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignWithParentIfMissing="true"
+            android:layout_alignBottom="@id/image"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@id/image"
-            tools:text="دیروز در سعادت آباد" />
+            android:paddingTop="10dp"
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
 
         <RelativeLayout
             android:id="@+id/bottom_of_item"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/image" />
+            android:layout_below="@id/image"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 
