@@ -14,16 +14,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    ft.replace(R.id.fragment_container, new PostFragment());
+                    ft.commit();
                     return true;
                 case R.id.navigation_category:
                     return true;
                 case R.id.navigation_search:
                     return true;
                 case R.id.navigation_submit:
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragment_container, new PostFragment());
+                    ft.replace(R.id.fragment_container, new SubmitFragment());
                     ft.commit();
                     return true;
             }
