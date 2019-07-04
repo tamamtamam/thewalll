@@ -1,15 +1,20 @@
 package proj1.tamamtamam.thewall;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import proj1.tamamtamam.thewall.dummy.DummyContent.DummyItem;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import proj1.tamamtamam.thewall.dummy.DummyContent.DummyItem;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -18,11 +23,13 @@ import java.util.List;
 public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecyclerViewAdapter.ViewHolder> {
 
     private final List<Post> mValues;
+    private final Context context;
     private final View.OnClickListener mListener;
 
-    public PostsRecyclerViewAdapter(List<Post> items, View.OnClickListener listener) {
+    public PostsRecyclerViewAdapter(Context context, List<Post> items, View.OnClickListener listener) {
         mValues = items;
         mListener = listener;
+        this.context = context;
     }
 
     @Override
@@ -40,6 +47,23 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
         holder.mPlaceView.setText(mValues.get(position).getPlace());
         holder.mDateView.setText(mValues.get(position).getDate());
 
+        Picasso.with(this.context)
+                .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
+                .placeholder(android.R.drawable.arrow_down_float)
+                .resize(400, 400)
+                .centerCrop()
+                .rotate(0)
+                .into(holder.mImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(context, "Fetched image from internet", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError() {
+                        Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

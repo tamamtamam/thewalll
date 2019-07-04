@@ -50,7 +50,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
-        adapter = new PostsRecyclerViewAdapter(postList, this);
+        adapter = new PostsRecyclerViewAdapter(getContext(), postList, this);
         mRecyclerView.setAdapter(adapter);
     }
 
