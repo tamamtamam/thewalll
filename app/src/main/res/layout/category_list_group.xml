@@ -10,7 +10,8 @@
         android:layout_alignParentLeft="true"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingHorizontal="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
         />
 
     <TextView
@@ -21,5 +22,5 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 </RelativeLayout>
