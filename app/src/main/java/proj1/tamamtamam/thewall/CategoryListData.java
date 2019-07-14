@@ -33,4 +33,13 @@ public class CategoryListData {
         expandableListDetail.put("Sports & Leisure", hobbies);
         return expandableListDetail;
     }
+
+    public static HashMap<String, Integer> getIcon() {
+        HashMap<String, Integer> expandableListIcon = new HashMap<String, Integer>();
+
+        expandableListIcon.put("Electronics", R.drawable.ic_search_black_24dp);
+        expandableListIcon.put("Clothing", R.drawable.ic_home_black_24dp);
+        expandableListIcon.put("Sports & Leisure", R.drawable.ic_add_circle_black_24dp);
+        return expandableListIcon;
+    }
 }

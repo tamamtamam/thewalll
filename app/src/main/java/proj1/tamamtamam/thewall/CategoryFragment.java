@@ -31,6 +31,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
+    HashMap<String, Integer> expandableListIcon;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -72,8 +73,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
 
 
         expandableListDetail = CategoryListData.getData();
+        expandableListIcon = CategoryListData.getIcon();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-        expandableListAdapter = new CategoryExpandableListAdapter(getContext(), expandableListTitle, expandableListDetail);
+        expandableListAdapter = new CategoryExpandableListAdapter(getContext(), expandableListTitle, expandableListDetail, expandableListIcon);
 
         expandableListView.setAdapter(expandableListAdapter);
 

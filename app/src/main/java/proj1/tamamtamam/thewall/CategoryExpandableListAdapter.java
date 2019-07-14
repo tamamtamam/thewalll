@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CategoryExpandableListAdapter extends BaseExpandableListAdapter {
@@ -15,12 +17,14 @@ public class CategoryExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> categoryListTitle;
     private HashMap<String, List<String>> expandableListSubcategory;
+    private HashMap<String, Integer> categoryListIcon;
 
     public CategoryExpandableListAdapter(Context context, List<String> categoryListTitle,
-                                       HashMap<String, List<String>> expandableListSubcategory) {
+                                       HashMap<String, List<String>> expandableListSubcategory, HashMap<String, Integer> categoryListIcon) {
         this.context = context;
         this.categoryListTitle = categoryListTitle;
         this.expandableListSubcategory = expandableListSubcategory;
+        this.categoryListIcon = categoryListIcon;
     }
 
     @Override
@@ -74,11 +78,14 @@ public class CategoryExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int listPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String listTitle = (String) getGroup(listPosition);
+        Integer listIcon = this.categoryListIcon.get(this.categoryListTitle.get(listPosition));
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.category_list_group, null);
         }
+        ImageView listIconImageView = (ImageView) convertView.findViewById(R.id.listImage);
+        listIconImageView.setImageResource(listIcon);
         TextView listTitleTextView = (TextView) convertView
                 .findViewById(R.id.listTitle);
         listTitleTextView.setTypeface(null, Typeface.NORMAL);
