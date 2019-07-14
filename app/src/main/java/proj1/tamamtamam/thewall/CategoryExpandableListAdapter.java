@@ -81,7 +81,7 @@ public class CategoryExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView listTitleTextView = (TextView) convertView
                 .findViewById(R.id.listTitle);
-        listTitleTextView.setTypeface(null, Typeface.BOLD);
+        listTitleTextView.setTypeface(null, Typeface.NORMAL);
         listTitleTextView.setText(listTitle);
         return convertView;
     }
