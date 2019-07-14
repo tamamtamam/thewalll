@@ -83,9 +83,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getContext(),
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),
+//                        expandableListTitle.get(groupPosition) + " List Expanded.",
+//                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,9 +93,9 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getContext(),
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),
+//                        expandableListTitle.get(groupPosition) + " List Collapsed.",
+//                        Toast.LENGTH_SHORT).show();
 
             }
         });
