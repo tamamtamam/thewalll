@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
                     ft.commit();
                     return true;
                 case R.id.navigation_search:
+                    ft.replace(R.id.fragment_container, new SearchFragment());
+                    ft.commit();
                     return true;
                 case R.id.navigation_submit:
                     ft.replace(R.id.fragment_container, new SubmitFragment());
