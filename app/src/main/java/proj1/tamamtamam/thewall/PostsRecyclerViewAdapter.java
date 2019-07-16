@@ -46,8 +46,8 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
         holder.mDateView.setText(mValues.get(position).getPrice());
 
         Picasso.with(this.context)
-                .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
-                .placeholder(android.R.drawable.arrow_down_float)
+                .load("https://images.unsplash.com/photo-1558244402-286dd748c593?ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80")
+                .placeholder(R.drawable.ic_wallpaper_gray_24dp)
                 .resize(400, 400)
                 .centerCrop()
                 .rotate(0)
