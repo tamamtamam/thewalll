@@ -12,19 +12,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import proj1.tamamtamam.thewall.dummy.DummyContent.DummyItem;
-
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * TODO: Replace the implementation with code for your data type.
- */
 public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecyclerViewAdapter.ViewHolder> {
 
     private final List<Post> mValues;
     private final Context context;
-    private final View.OnClickListener mListener;
+    private final PostClickedListener mListener;
 
-    public PostsRecyclerViewAdapter(Context context, List<Post> items, View.OnClickListener listener) {
+    public PostsRecyclerViewAdapter(Context context, List<Post> items, PostClickedListener listener) {
         mValues = items;
         mListener = listener;
         this.context = context;
@@ -39,18 +33,17 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mTitleView.setText(mValues.get(position).getTitle());
         holder.mPlaceView.setText(mValues.get(position).getPlace());
         holder.mDateView.setText(mValues.get(position).getPrice());
 
-        Picasso.with(this.context)
-                .load("https://www.tutorialspoint.com/images/tp-logo-diamond.png")
+        Picasso.get()
+                .load(mValues.get(position).getImageUrl())
                 .placeholder(R.drawable.ic_wallpaper_gray_24dp)
                 .resize(400, 400)
                 .centerCrop()
-                .rotate(0)
                 .into(holder.mImageView);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +52,7 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onClick(v);
+                    mListener.postClicked(mValues.get(position));
                 }
             }
         });
@@ -92,5 +85,10 @@ public class PostsRecyclerViewAdapter extends RecyclerView.Adapter<PostsRecycler
         public String toString() {
             return super.toString() + " '" + "'";
         }
+    }
+
+    public interface PostClickedListener {
+
+        void postClicked(Post post);
     }
 }
