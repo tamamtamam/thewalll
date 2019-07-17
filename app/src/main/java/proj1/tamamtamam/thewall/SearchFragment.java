@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,7 +33,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -40,19 +44,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_bar, menu);
 
-        postList = new ArrayList<>();
-        postList.add(new Post(1, "a used laptop", "downtown resort", "$200"));
-        postList.add(new Post(2, "a used charger", "downtown resort", "$10"));
-        mRecyclerView = getView().findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
-                DividerItemDecoration.VERTICAL));
-        adapter = new PostsRecyclerViewAdapter(getContext(), postList, this);
-
-        mRecyclerView.setAdapter(adapter);
+        MenuItem searchMenuItem = menu.findItem( R.id.search );
+        searchMenuItem.expandActionView();
     }
 
     @Override
