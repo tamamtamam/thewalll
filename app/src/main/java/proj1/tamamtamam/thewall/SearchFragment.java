@@ -1,28 +1,30 @@
 package proj1.tamamtamam.thewall;
 
-import android.arch.lifecycle.ViewModelStoreOwner;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFragment extends Fragment implements View.OnClickListener {
+public class SearchFragment extends Fragment implements PostsRecyclerViewAdapter.PostClickedListener {
 
     private RecyclerView mRecyclerView;
     private PostsRecyclerViewAdapter adapter;
     private List<Post> postList;
-
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -43,17 +45,74 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_bar, menu);
 
-        MenuItem searchMenuItem = menu.findItem( R.id.search );
-        searchMenuItem.expandActionView();
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        postList = PostListProvider.getList();
+
+        mRecyclerView = getView().findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL));
+        adapter = new PostsRecyclerViewAdapter(getContext(), postList, this);
+
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void onClick(View v) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_bar, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+
+            queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    Log.i("onQueryTextChange", newText);
+
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Log.i("onQueryTextSubmit", query);
+
+                    postList.clear();
+                    List<Post> newPostList = PostListProvider.getList();
+                    postList.addAll(newPostList);
+                    adapter.notifyDataSetChanged();
+
+                    return true;
+                }
+            };
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                // Not implemented here
+                return false;
+            default:
+                break;
+        }
+        searchView.setOnQueryTextListener(queryTextListener);
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void postClicked(Post post) {
 
     }
 }
