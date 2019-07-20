@@ -2,6 +2,7 @@ package proj1.tamamtamam.thewall;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -116,8 +117,14 @@ public class SearchFragment extends Fragment implements PostsRecyclerViewAdapter
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void postClicked(Post post) {
-
+        Intent myIntent = new Intent(getActivity(), PostDetailsActivity.class);
+        myIntent.putExtra("title", post.getTitle());
+        myIntent.putExtra("price", post.getPrice());
+        myIntent.putExtra("place", post.getPlace());
+        myIntent.putExtra("imageUrl", post.getImageUrl());
+        getActivity().startActivity(myIntent);
     }
 }
