@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment implements PostsRecyclerViewAdapter.PostClickedListener {
@@ -87,7 +88,11 @@ public class SearchFragment extends Fragment implements PostsRecyclerViewAdapter
 
                     postList.clear();
                     List<Post> newPostList = PostListProvider.getList();
-                    postList.addAll(newPostList);
+                    List<Post> selectedPosts = new ArrayList<>();
+                    for(Post post:newPostList)
+                        if(post.getTitle().toLowerCase().contains(query.toLowerCase()))
+                            selectedPosts.add(post);
+                    postList.addAll(selectedPosts);
                     adapter.notifyDataSetChanged();
 
                     return true;
