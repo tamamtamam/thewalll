@@ -100,6 +100,36 @@ public class SearchFragment extends Fragment implements PostsRecyclerViewAdapter
                 }
             };
             searchView.setOnQueryTextListener(queryTextListener);
+            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                @Override
+                public boolean onClose() {
+                    Log.i("onClose", "a");
+
+                    postList.clear();
+                    List<Post> newPostList = PostListProvider.getList();
+                    postList.addAll(newPostList);
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+            });
+            searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+                @Override
+                public boolean onMenuItemActionExpand(MenuItem item) {
+                    return false;
+                }
+
+                @Override
+                public boolean onMenuItemActionCollapse(MenuItem item) {
+                    Log.i("onMenuItemActionCollapse", item.toString());
+
+                    postList.clear();
+                    List<Post> newPostList = PostListProvider.getList();
+                    postList.addAll(newPostList);
+                    adapter.notifyDataSetChanged();
+
+                    return true;
+                }
+            });
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
